@@ -58,10 +58,14 @@
             <input class="log1" type="email" name="email" placeholder="Unesite vas email">
             <input class="log2" type="password" name="password" placeholder="Unesite vas password">
             <input class="submit1" type="submit" name="login" value="Login">
+            <a href="index.php" class="ca">Create an account</a>
+            
 
-            <a href="resetpassword.php" class="pass">Forgot password</a>
+            <a href="resetpassword.php" class="pass">Forgot password?</a>
 
         </form>
 
+
+         
 </body>
 </html>

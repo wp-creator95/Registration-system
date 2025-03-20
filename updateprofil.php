@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -69,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
         echo "Sva polja su obavezna!";
     }
 }
+   
 ?>
 
 <!DOCTYPE html>
@@ -89,9 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
     <?php endforeach; ?>
 </nav>
 
-<form class="login" method="POST" action="">
+<form class="login" method="POST" action="" enctype="multipart/form-data">
     <input class="log2" type="text" name="name" placeholder="Unesite novo ime" value="<?php echo htmlspecialchars($currentSettings['Ime'] ?? ''); ?>">
     <input class="log1" type="email" name="email" placeholder="Unesite vaš novi email" value="<?php echo htmlspecialchars($currentSettings['Email'] ?? ''); ?>">
+    <input class="log1" type="file" name="pp" accept="image/*">
     <input class="submit1" type="submit" name="update" value="Update">
 </form>
 
