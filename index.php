@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 $db = mysqli_connect("localhost", "root", "", "vezba");
 
@@ -40,15 +43,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt->close();
 
+        // OBRADA SLIKE
+        $profile_pic = "uploads/default.jpg"; // Default slika ako korisnik ne doda svoju
+
+        if (!empty($_FILES["pp"]["name"])) {
+            $target_dir = "uploads/";
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true); // Napravi folder ako ne postoji
+            }
+
+            $imageFileType = strtolower(pathinfo($_FILES["pp"]["name"], PATHINFO_EXTENSION));
+            $allowed_types = ["jpg", "jpeg", "png", "gif"];
+
+            if (!in_array($imageFileType, $allowed_types)) {
+                die("Greška: Dozvoljeni formati su JPG, JPEG, PNG, GIF!");
+            }
+
+            $profile_pic = $target_dir . uniqid() . "." . $imageFileType;
+            if (!move_uploaded_file($_FILES["pp"]["tmp_name"], $profile_pic)) {
+                die("Greška prilikom premještanja fajla! Kod greške: " . $_FILES["pp"]["error"]);
+            }
+        }
+
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        $stmt = $db->prepare("INSERT INTO users (Ime, Prezime, Email, Lozinka) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $name, $lastName, $email, $hashed_password);
+        $stmt = $db->prepare("INSERT INTO users (Ime, Prezime, Email, Lozinka, ProfilnaSlika) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $name, $lastName, $email, $hashed_password, $profile_pic);
 
         if ($stmt->execute()) {
             $_SESSION["name"] = $name;
             $_SESSION["lastName"] = $lastName;
             $_SESSION["email"] = $email;
+            $_SESSION["profile_pic"] = $profile_pic;
             header("Location: login.php");
             exit();
         } else {
@@ -129,7 +155,7 @@ $password = password_hash($password, PASSWORD_BCRYPT);
 <body>
 
  
-    <form method="POST" action="index.php">
+    <form method="POST" action="index.php" enctype="multipart/form-data">
 
     <div class="form">
       <div class="title">Welcome</div>
@@ -158,6 +184,9 @@ $password = password_hash($password, PASSWORD_BCRYPT);
         <input id="email" class="input <?php if(empty($repeat_password)) {echo "error";}?>" type="password" name="repeat_password" placeholder=" " requrired/>
         <div class="cut cut-short"></div>
         <label for="repeat_password" class="placeholder">Repeat password</>
+      </div>
+      <div class="input-container ic2">
+      <input type="file" name="pp" accept="image/*">
       </div>
       <button type="text" class="submit">submit</button>
       

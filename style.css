@@ -185,7 +185,7 @@ body {
   }
 
 
-  
+  /* Login form */
 
   body {
     font-family: Arial, sans-serif;
@@ -244,11 +244,26 @@ body {
   color: #000;
 }
 
+ .ca {
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px;
+ }
+
+ .ca:hover {
+  text-decoration: none;
+  background-color: #06b;
+  color: #fff;
+ }
+
 
 /*navigation */
 
 .nav {
-  background-color: #333;
+  background-color: #47d1ff;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -273,8 +288,83 @@ body {
 }
 
 .nav a:hover {
-  background-color: #555;
+  background-color: #3153fc;
   transform: scale(1.1);
 }
 
+/*Profil */
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lg {
+  background-color: #dc2f55;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.lg:hover {
+  background-color: #df627d;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.rp {
+  background-color: #4caa3c;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.rp:hover {
+  background-color: #b3d85c;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.upd {
+  background-color: #efad1f;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.upd:hover {
+  background-color: #f0c66a;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.dlt {
   
+  background-color: #004bfa;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.dlt:hover {
+
+  background-color: #4e83ff;
+  color: #f4f4f4;
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+ 
+
+ 
